@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#21120e">
+<title>A Little Something for You 🤎</title>
+<style>
+:root{
+  --espresso:#21120e; --dark:#2d1a14; --walnut:#513326;
+  --gold:#c5a46d; --pale-gold:#ead6a8; --cream:#f5ead5;
+  --muted:#cbb99b; --line:rgba(197,164,109,.45);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--espresso);color:var(--cream);
+  font-family:Georgia,"Times New Roman",serif;line-height:1.7;
+  min-height:100vh;overflow-x:hidden;
+}
+body:before{
+  content:"";position:fixed;inset:0;pointer-events:none;opacity:.13;z-index:-1;
+  background-image:radial-gradient(circle at 20% 20%,#b78c4d 0 1px,transparent 1.5px),
+  radial-gradient(circle at 80% 70%,#b78c4d 0 1px,transparent 1.5px);
+  background-size:37px 41px,53px 47px;
+}
+button{font:inherit;cursor:pointer}
+button:focus-visible,a:focus-visible{outline:2px solid var(--pale-gold);outline-offset:4px}
+.shell{width:min(100% - 28px,820px);margin:0 auto;padding:20px 0 52px}
+.topline{display:flex;justify-content:space-between;align-items:center;gap:12px;color:var(--muted);font:11px/1.4 Arial,sans-serif;letter-spacing:2px;text-transform:uppercase}
+.sound-note{border:1px solid var(--line);border-radius:99px;padding:7px 12px;white-space:nowrap}
+.frame{
+  position:relative;margin:22px 0;padding:clamp(25px,6vw,60px) clamp(18px,6vw,58px);
+  border:1px solid var(--gold);outline:1px solid rgba(197,164,109,.18);outline-offset:5px;
+  background:linear-gradient(145deg,rgba(73,45,30,.96),rgba(31,17,13,.98) 65%);
+  box-shadow:0 20px 70px #0005;overflow:hidden;isolation:isolate;
+}
+.frame:before,.frame:after{content:"";position:absolute;top:0;bottom:0;width:13px;opacity:.8;
+  background:repeating-linear-gradient(45deg,transparent 0 6px,var(--gold) 6px 7px,transparent 7px 13px),
+  repeating-linear-gradient(-45deg,transparent 0 9px,rgba(197,164,109,.5) 9px 10px,transparent 10px 18px);
+  z-index:-1}
+.frame:before{left:0}.frame:after{right:0}
+.ornament{color:var(--gold);font-size:25px;letter-spacing:8px;text-align:center;margin:0 0 16px}
+.kicker{font:11px Arial,sans-serif;letter-spacing:3px;text-transform:uppercase;color:var(--gold);text-align:center}
+h1,h2{font-weight:normal;line-height:1.2;text-align:center;margin:12px 0 18px}
+h1{font-size:clamp(37px,8vw,68px);font-style:italic;color:var(--pale-gold)}
+h2{font-size:clamp(30px,6vw,44px);font-style:italic;color:var(--pale-gold)}
+p{max-width:560px;margin:12px auto;text-align:center}
+.lede{font-size:18px;color:#e7d7bd}
+.small{font-size:14px;color:var(--muted)}
+.actions{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin:28px auto 4px}
+.btn{border:1px solid var(--gold);background:transparent;color:var(--pale-gold);border-radius:99px;padding:12px 23px;transition:transform .2s,background .2s,color .2s}
+.btn:hover{transform:translateY(-2px);background:rgba(197,164,109,.12)}
+.btn.primary{background:var(--gold);color:#24150f;font-weight:bold}
+.btn.primary:hover{background:var(--pale-gold)}
+.hidden{display:none!important}
+.section{animation:fadein .7s ease both}
+@keyframes fadein{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.rule{height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:28px auto;max-width:420px}
+.poem-paper{color:#3d281e;background:#eee0c4;padding:clamp(20px,5vw,42px);margin:24px auto;max-width:560px;
+  border:1px solid #c8a96d;box-shadow:0 8px 25px #0004;position:relative}
+.poem-paper:before{content:"";position:absolute;inset:7px;border:1px solid #b28c52;pointer-events:none}
+.poem-paper h2{color:#583827;font-size:34px}
+.poem{white-space:pre-line;text-align:center;line-height:1.85;font-size:16px;position:relative}
+.poem span{display:block;opacity:0;transform:translateY(5px);animation:linein .7s ease forwards}
+@keyframes linein{to{opacity:1;transform:translateY(0)}}
+.motif{width:100%;max-width:240px;display:block;margin:22px auto;color:var(--gold)}
+.hearts-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;max-width:430px;margin:24px auto}
+.heart-card{min-height:95px;border:1px solid var(--line);background:#281710;color:var(--pale-gold);font-size:28px;border-radius:12px;transition:.2s}
+.heart-card:hover{background:#4a2c1c;transform:translateY(-2px)}
+.heart-card span{display:block;font:12px Arial,sans-serif;color:var(--muted);margin-top:3px}
+.reveal{font-size:15px;color:var(--pale-gold);min-height:52px}
+.final-question{font-size:clamp(35px,8vw,58px)}
+.footer{text-align:center;color:#a58f72;font:11px Arial,sans-serif;letter-spacing:1px;margin-top:25px}
+.confetti{position:fixed;top:-20px;z-index:10;pointer-events:none;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(650deg);opacity:.1}}
+@media(max-width:480px){
+ .shell{width:min(100% - 20px,820px);padding-top:14px}
+ .topline{font-size:9px;letter-spacing:1px}
+ .sound-note{padding:6px 8px}
+ .frame{margin:18px 0;padding:32px 21px}
+ .frame:before,.frame:after{width:9px}
+ .hearts-grid{gap:8px}.heart-card{min-height:83px}
+ .poem{font-size:15px}
+}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="topline"><span>A small thing, made with care</span><span class="sound-note">♡ made for you</span></div>
+
+  <main>
+    <section class="frame section" id="welcome">
+      <div class="ornament">✧ ❖ ✧</div>
+      <div class="kicker">For one very special person</div>
+      <h1>A letter<br>for you.</h1>
+      <p class="lede">Some hearts just know…<br>even when the world is quiet,<br>mine keeps finding you.</p>
+      <svg class="motif" viewBox="0 0 240 70" fill="none" aria-hidden="true">
+        <g stroke="currentColor" stroke-width="1.4">
+          <path d="M120 8 137 25 120 42 103 25Z M120 17 128 25 120 33 112 25Z"/>
+          <path d="M103 25H72L62 15 52 25 62 35 72 25 M137 25h31l10-10 10 10-10 10-10-10"/>
+          <path d="M120 42v14m-6-7 6 7 6-7M52 25h-15m146 0h15"/>
+        </g>
+      </svg>
+      <p class="small">I made this little corner of the internet just for you.</p>
+      <div class="actions"><button class="btn primary" onclick="showSection('letter')">Open your letter&nbsp; ♡</button></div>
+    </section>
+
+    <section class="frame section hidden" id="letter">
+      <div class="ornament">✧ ❖ ✧</div><div class="kicker">A few words from me</div>
+      <h2>To you,</h2>
+      <p>I don't know if you realise it, but you've brought a kind of warmth into my world that I didn't know I was missing.</p>
+      <p>It's in the little things: a conversation that stays in my mind, a smile I remember later, and the simple happiness of getting to know you a little more.</p>
+      <p>I can't promise that every day will be perfect. But I can promise that I want to be sincere with you, to listen, to make you laugh, and to keep choosing kindness in the way I treat your heart.</p>
+      <p class="lede"><em>And there's something else I want you to read…</em></p>
+      <div class="actions"><button class="btn primary" onclick="showSection('poem')">Read your poem ✧</button></div>
+    </section>
+
+    <section class="frame section hidden" id="poem">
+      <div class="kicker">Written with you in mind</div>
+      <div class="poem-paper">
+        <div class="ornament">❖</div>
+        <h2>Where My Heart Finds You</h2>
+        <div class="poem" id="poemText"></div>
+        <div class="rule"></div>
+        <p><em>A thousand miles, one heart, one you.</em></p>
+      </div>
+      <p class="small">Inspired by the beauty of Turkmen patterns: every little thread matters, and every one helps make something beautiful.</p>
+      <div class="actions"><button class="btn primary" onclick="showSection('surprises')">A few little surprises ♡</button></div>
+    </section>
+
+    <section class="frame section hidden" id="surprises">
+      <div class="ornament">✧ ❖ ✧</div>
+      <div class="kicker">Tap a heart to open it</div>
+      <h2>Little things I want you to know</h2>
+      <p class="small">Each heart has a message for you.</p>
+      <div class="hearts-grid">
+        <button class="heart-card" onclick="reveal(0)">♡<span>one</span></button>
+        <button class="heart-card" onclick="reveal(1)">♡<span>two</span></button>
+        <button class="heart-card" onclick="reveal(2)">♡<span>three</span></button>
+      </div>
+      <p class="reveal" id="revealText" aria-live="polite">Choose a heart, sweetheart. 🤎</p>
+      <div class="actions"><button class="btn" onclick="showSection('question')">One last thing…</button></div>
+    </section>
+
+    <section class="frame section hidden" id="question">
+      <div class="ornament">✧ ❖ ✧</div>
+      <div class="kicker">This is the part I've been nervous about</div>
+      <p class="lede">After all these words, there's one question I really want to ask you.</p>
+      <h1 class="final-question">Will you be<br>my girlfriend?</h1>
+      <p class="small">Whatever your answer, I want you to feel comfortable being honest with me. No pressure, just my heart being brave.</p>
+      <div class="actions">
+        <button class="btn primary" onclick="sayYes()">Yes, I'd love to 🤎</button>
+        <button class="btn" onclick="sayMaybe()">I need a little time</button>
+      </div>
+      <p class="reveal" id="answerText" aria-live="polite"></p>
+    </section>
+
+    <section class="frame section hidden" id="celebration">
+      <div class="ornament">✧ ❖ ✧</div>
+      <div class="kicker">A new little chapter</div>
+      <h1>Oh, my heart. 🤎</h1>
+      <p class="lede">You've made me happier than these words can explain.</p>
+      <p>Thank you for choosing to take this step with me. I hope we fill the days ahead with laughter, gentleness, honest conversations, and memories we'll be glad we made.</p>
+      <div class="rule"></div>
+      <h2>Here's to us.</h2>
+      <p class="small">With all my heart, always choosing to show up with care.</p>
+      <div class="actions"><button class="btn" onclick="showSection('welcome')">Read it again ↺</button></div>
+    </section>
+  </main>
+  <div class="footer">MADE WITH CARE · A LITTLE PIECE OF MY HEART ♡</div>
+</div>
+
+<script>
+const poemLines = [
+"If I could cross a thousand miles,",
+"I'd cross them just to see your smile.",
+"Past distant lands and skies of blue,",
+"I'd find my way, my love, to you.",
+"",
+"Your eyes hold stars no night could steal,",
+"Your voice makes far-off places feel",
+"Like home is not a place at all,",
+"But you beside me through it all.",
+"",
+"And like a carpet, thread by thread,",
+"A thousand little words we've said",
+"Could weave a love both soft and true,",
+"A world of colours shaped by you.",
+"",
+"So let tomorrow take its time,",
+"Let fate unfold its own design.",
+"Of all the dreams my heart could see,",
+"The sweetest is you choosing me.",
+"",
+"And if you take my hand one day,",
+"I'll cherish you in every way.",
+"No grander wish, no skies above—",
+"Just you, your heart, and all my love."
+];
+const poemText = document.getElementById('poemText');
+poemLines.forEach((line, i) => {
+  const span = document.createElement('span');
+  span.textContent = line || '\u00a0';
+  span.style.animationDelay = `${i * 0.12}s`;
+  poemText.appendChild(span);
+});
+
+const messages = [
+  "You deserve to feel appreciated for exactly who you are. 🤎",
+  "I love learning the little things that make you, you. ✨",
+  "Whatever comes next, I want it to be honest, gentle, and real. ♡"
+];
+function reveal(index) {
+  document.getElementById('revealText').textContent = messages[index];
+  document.querySelectorAll('.heart-card').forEach((button, i) => {
+    if (i === index) button.innerHTML = '♥<span>opened</span>';
+  });
+}
+function showSection(id) {
+  document.querySelectorAll('main > section').forEach(section => section.classList.add('hidden'));
+  const next = document.getElementById(id);
+  next.classList.remove('hidden');
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+function sayMaybe() {
+  document.getElementById('answerText').textContent =
+    "Take all the time you need. I'm glad I got to tell you how I feel. 🤎";
+}
+function sayYes() {
+  showSection('celebration');
+  const symbols = ['✦', '♡', '✧', '❖'];
+  for (let i = 0; i < 55; i++) {
+    const piece = document.createElement('span');
+    piece.className = 'confetti';
+    piece.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+    piece.style.left = Math.random() * 100 + 'vw';
+    piece.style.color = i % 2 ? '#c5a46d' : '#f5ead5';
+    piece.style.fontSize = (12 + Math.random() * 18) + 'px';
+    piece.style.animationDuration = (3 + Math.random() * 4) + 's';
+    document.body.appendChild(piece);
+    setTimeout(() => piece.remove(), 7500);
+  }
+}
+</script>
+</body>
+</html>
